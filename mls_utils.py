@@ -13,7 +13,6 @@ from sklearn.pipeline import Pipeline
 from sklearn.linear_model import LinearRegression
 
 
-
 def split_data(df, features, target, test_size=0.2, random_state=42):
     # Split the data into X and y.  Change test size and random state as needed.
     X = df[features]
@@ -21,9 +20,9 @@ def split_data(df, features, target, test_size=0.2, random_state=42):
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=random_state)
     return X_train, X_test, y_train, y_test
 
-def train_decision_tree_model(X_train, y_train, random_state=42):
+def train_decision_tree_model(X_train, y_train, random_state=42, max_depth=None):
     #Train a DecisionTreeRegressor model
-    regressor = DecisionTreeRegressor(random_state=random_state)
+    regressor = DecisionTreeRegressor(random_state=random_state, max_depth=max_depth)
     regressor.fit(X_train, y_train)
     return regressor
 
@@ -33,15 +32,15 @@ def visualize_tree(regressor, feature_names):
     plot_tree(regressor, feature_names=feature_names, filled=True, rounded=True, fontsize=12)
     plt.show()
 
-def train_linear_regression_model(X_train, y_train):
+def train_linear_regression_model(X_train, y_train, alpha=0.0):
     #Train a LinearRegression model
-    regressor = LinearRegression()
+    regressor = Ridge(alpha=alpha)
     regressor.fit(X_train, y_train)
     return regressor
 
-def train_random_forest_model(X_train, y_train, random_state=42, n_estimators=100):
+def train_random_forest_model(X_train, y_train, random_state=42, n_estimators=100, max_depth=None):
     #Train a RandomForestRegressor model
-    regressor = RandomForestRegressor(n_estimators=n_estimators, random_state=random_state)
+    regressor = RandomForestRegressor(n_estimators=n_estimators, random_state=random_state, max_depth=max_depth)
     regressor.fit(X_train, y_train)
     return regressor
 
@@ -67,6 +66,20 @@ def evaluate_model(regressor, X_train, X_test, y_train, y_test):
     train_r2 = r2_score(y_train, y_pred_train)
     test_r2 = r2_score(y_test, y_pred_test)
     return train_mse, test_mse, train_r2, test_r2
+
+def tune_hyperparameters(X_train, y_train, model_type):
+    """Tune hyperparameters for the given model type."""
+    if model_type == 'decision_tree':
+        param_grid = {'max_depth': [3, 5, 7, 10, None]}
+        model = GridSearchCV(DecisionTreeRegressor(random_state=42), param_grid, cv=5)
+    elif model_type == 'svm':
+        param_grid = {'C': [0.1, 1, 10], 'epsilon': [0.01, 0.1, 0.5], 'kernel': ['linear', 'rbf']}
+        model = GridSearchCV(SVR(), param_grid, cv=5)
+    elif model_type == 'knn':
+        param_grid = {'n_neighbors': [3, 5, 7, 10]}
+        model = GridSearchCV(KNeighborsRegressor(), param_grid, cv=5)
+    model.fit(X_train, y_train)
+    return model.best_estimator_
 
 
 
