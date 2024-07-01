@@ -67,11 +67,15 @@ def evaluate_model(regressor, X_train, X_test, y_train, y_test):
     test_r2 = r2_score(y_test, y_pred_test)
     return train_mse, test_mse, train_r2, test_r2
 
+
 def tune_hyperparameters(X_train, y_train, model_type):
     """Tune hyperparameters for the given model type."""
     if model_type == 'decision_tree':
         param_grid = {'max_depth': [3, 5, 7, 10, None]}
         model = GridSearchCV(DecisionTreeRegressor(random_state=42), param_grid, cv=5)
+    elif model_type == 'random_forest':
+        param_grid = {'n_estimators': [100, 1000, 10000], 'max_features': [0.25, 0.5, 1.0], 'bootstrap': [True]}
+        model = GridSearchCV(RandomForestRegressor(), param_grid)
     elif model_type == 'svm':
         param_grid = {'C': [0.1, 1, 10], 'epsilon': [0.01, 0.1, 0.5], 'kernel': ['linear', 'rbf']}
         model = GridSearchCV(SVR(), param_grid, cv=5)
