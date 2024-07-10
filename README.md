@@ -11,18 +11,18 @@
 - [Model Training](#model-training)
 - [Model Evaluation](#model-evaluation)
 ## 2. [Tools](#tools)
-## 3. [Team Analysis](#team-analysis)
-- [Team Members](#team-members)
+## 3. [Team Members](#team-members)
 ## 4. [Installation](#installation)
 - [Steps to install](#steps-to-install)
 - [Dependencies](#dependencies)
 ## 5. [Usage](#usage)
 
+## 6. [Contribution](#contribution)
 
 ## Methodology <a name="methodology"></a>
 
 ### Data Collection <a name="data-collection"></a>
- - Sources: 2021-2024 MLS Data for the Triangle Area
+ - Sources: MLS Data for the Triangle Area
  
  - Data Features: MLS #, Class, Property Type, Address, City, Zip, Neighborhood, Subdivision, Bedrooms, Total Baths, Total Living Area SqFt, Acres, Year Built, List Date, Closing Date, Days On Market, List Price, Sold Price, and Unna
 
@@ -30,17 +30,17 @@
 
 
 ### Data Exploration <a name="data-exploration"></a> 
-  - Visualization:
+  - Visualization: Matplotlib, pandas.plotting, seaborn 
+
+  - Statistical Analysis: '.describe()', '.info()', '.value_counts()', 'z-score', 'df.corr()' 
 
 
 ### Data Preprocessing <a name="data-preprocessing"></a> 
- - Data Cleaning:
+ - Data Cleaning: Handling null entries, correcting errors, dropping missing values, converting value types to integers. 
 
 
- - Encoding:
-
-
- - Standarization:
+ - Transformation: 'utils.scale_data'
+    - 'StandardScaler()'
 
 
 ### Model Selection <a name="model-selection"></a> 
@@ -52,36 +52,51 @@
  - KNN
 
 ### Model Training <a name="model-training"></a> 
- - Data Splits:
+ - Data Splits: 'utils.split_data'
+    - 'train_test_split()'
 
 
-- Hyperparameter Tuning:
+- Hyperparameter Tuning: Data Models Optimization will be in the 'mls_utils File'--> 'utils.tune_hyperparameters'
 
 
 
 ### Model Evaluation <a name="model-evaluation"></a> 
-- Scoring Methods:
+- Scoring Methods: 'utils.evaluate_model'
+    - mean_squared_error MSE 
+    - r2 score 
 
 
 
 ### Tools <a name="tools"></a>
 - Programming Language: Python
-- Libraries: Pandas, NumPy, Scikit-learn,
+- Libraries: Pandas, NumPy, Scikit-learn, datetime
 - Visualization Tools: Matplotlib, Seaborn
+- Utils File: 'mls_utils.py'
+    - splits data
+    - scales data
+    - initiates models
+    - tunes hyperparameters
+    - calculates bias variance
+    - evaluates models
 
-### Team Analysis <a name="team-analysis"></a>
-- Our input based on what we thought before doing the project and after.
 
 ### Team Members <a name="team-members"></a>
-- Richard Lankford: Links to Github & Linkedin 
-- Amelia Fernandez: Links to Github & Linkedin
-- David Little: Links to Github & Linkedin
+- Richard Lankford 
+    - Github: https://github.com/rwlankford
+    - Linkedin: https://www.linkedin.com/in/rwlankford/
+- Amelia Fernandez
+    - Github: https://github.com/aFernandez88
+    - Linkedin: https://www.linkedin.com/in/amelia-fernandez-17a56220b/
+- David Little
+    - Github: https://github.com/drlphysics
+    - Linkedin: https://www.linkedin.com/in/david-little-phd-67b360185/
 
 ### Installation <a name="installation"></a>
 - ### Steps to install <a name="steps-to-install"></a>
-    1. Clone repository
-    2. 
-    3. 
+    1. Download the latest version of Python
+    2. pip install matplotlib scipy numpy Pandas scikit-learn seaborn jupyter mls_utils
+    3. Use the 'git clone' command to clone repository: https://github.com/drlphysics/Real_Estate_ML_Project.git
+    4. 'cd' Real_Estate_ML_Project
 - ### Dependencies <a name="dependencies"></a>
 - Python 3.8+
 - Pandas
@@ -89,9 +104,20 @@
 - Scikit-learn
 - Matplotlib
 - Seaborn
+- scipy.stats
 - Jupyter
+- mls_utils
 
-### Usage <a name="usage"></a>
+## Usage <a name="usage"></a>
+  1. Explore the data
+  2. Preprocess the data
+  3. Train the model
+  4. Evaluate the model
+  5. Deploy the model
+
+
+## Contribution <a name="contribution"></a>
+Your contributions are highly valued! Feel free to submit a pull request or open an issue to share your ideas
 
 
 
